@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import Apple from './COMPONENTS/Apple'
+import Top from './COMPONENTS/Top'
+import Navbar from './COMPONENTS/Navbar'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import International from './COMPONENTS/International';
+import Techcrus from './COMPONENTS/Techcrus';
+import Space from './COMPONENTS/Space';
+
 
 function App() {
+
+  const[color1 , aftercolor] = useState("light");
+
+    function press(){
+      if(color1==="light"){
+        aftercolor("dark");
+        document.body.style.backgroundColor = "#434343";
+      }else{
+        aftercolor("light");
+        document.body.style.backgroundColor = "#E4E4E4";
+      }
+    }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+    <BrowserRouter>
+
+      <Navbar theam={color1} click={press} />
+
+        <Routes>
+
+          <Route path="/home" element={<Top />}></Route>
+          <Route path="/WallStreet" element={<International />}></Route>
+          <Route path="/Tech" element={<Techcrus />}></Route>
+          <Route path="/apple" element={<Apple />}></Route>
+          <Route path="/space" element={<Space theam={color1} />}></Route>
+          
+
+        </Routes>
+      </BrowserRouter>
+    </>
+  )
 }
 
 export default App;
